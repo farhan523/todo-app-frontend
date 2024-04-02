@@ -1,6 +1,6 @@
 const url = require("../../baseUrl");
 
-async function completeTask(id, index, todo, setTodo, toast) {
+export default async function completeTask(id, index, todo, setTodo, toast) {
     try {
         let headersList = {
             Accept: "*/*",
@@ -34,4 +34,3 @@ async function completeTask(id, index, todo, setTodo, toast) {
     }
 }
 
-module.exports = completeTask;

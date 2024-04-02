@@ -1,6 +1,6 @@
 import url from "../../baseUrl";
 
-async function getAllTodo(setTodo, toast,setLoad) {
+export default async function getAllTodo(setTodo, toast,setLoad) {
     setLoad(true);
     try {
         let response = await fetch(`${url}api/task/`, {
@@ -21,4 +21,4 @@ async function getAllTodo(setTodo, toast,setLoad) {
     }
 }
 
-module.exports = getAllTodo;
+

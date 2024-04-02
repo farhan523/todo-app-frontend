@@ -1,5 +1,5 @@
 const url = require("@/baseUrl");
-async function addTodo(text, setTodo, setText, toast) {
+export default async function addTodo(text, setTodo, setText, toast) {
     if (text.length < 3) return toast.info("task length must be at least 3");
     try {
         let headersList = {
@@ -34,4 +34,3 @@ async function addTodo(text, setTodo, setText, toast) {
     }
 }
 
-module.exports = addTodo;

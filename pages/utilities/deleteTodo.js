@@ -1,6 +1,6 @@
 const url = require("../../baseUrl");
 
-async function deleteTask(id, todo, setTodo, toast) {
+export default async function deleteTask(id, todo, setTodo, toast) {
     try {
         let response = await fetch(`${url}api/task/remove/${id}`, {
             method: "DELETE"
@@ -20,4 +20,3 @@ async function deleteTask(id, todo, setTodo, toast) {
     }
 }
 
-module.exports = deleteTask;

@@ -1,6 +1,6 @@
 const url = require("../../baseUrl");
 
-async function updateTodo(todo, setTodo, setText, toast, text, edit, setEdit) {
+export default async function updateTodo(todo, setTodo, setText, toast, text, edit, setEdit) {
     try {
         if (text.length < 3) return toast.info("task length must be at least 3");
 
@@ -38,4 +38,3 @@ async function updateTodo(todo, setTodo, setText, toast, text, edit, setEdit) {
     }
 }
 
-module.exports = updateTodo;

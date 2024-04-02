@@ -89,7 +89,7 @@ export default function Home() {
                    {
                     load ? "loading..."  : todo.length ? (
                         todo.map((task, index) => {
-                            return <TodoItem index={index} toast={toast} setTodo={setTodo} todo={todo} editTodo={editTodo} task={task} deleteTask={deleteTask} completeTask={completeTask} />;
+                            return <TodoItem key={task._id} index={index} toast={toast} setTodo={setTodo} todo={todo} editTodo={editTodo} task={task} deleteTask={deleteTask} completeTask={completeTask} />;
                         })
                     ) : (
                         <p className="justify-center">No task today</p>

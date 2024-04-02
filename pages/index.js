@@ -5,11 +5,11 @@ import ListIcon from "@/public/icons/ListIcon";
 import ChevronIcon from "@/public/icons/ChevronIcon";
 import { toast } from "react-toastify";
 
-import addTodo from "../utilities/addTodo";
-import deleteTask from "../utilities/deleteTodo";
-import completeTask from "../utilities/completeTask";
-import updateTodo from "../utilities/updateTodo";
-import getAllTodo from "../utilities/getAllTodo";
+// import addTodo from "../utilities/addTodo";
+// import deleteTask from "../utilities/deleteTodo";
+// import completeTask from "../utilities/completeTask";
+// import updateTodo from "../utilities/updateTodo";
+// import getAllTodo from "../utilities/getAllTodo";
 
 import TodoItem from "@/components/TodoItem";
 
@@ -41,6 +41,158 @@ export default function Home() {
             index: null
         });
     }
+
+   async function addTodo(text= "", setTodo = "", setText = "", toast = "") {
+        if (text.length < 3) return toast.info("task length must be at least 3");
+        try {
+            let headersList = {
+                Accept: "*/*",
+                "Content-Type": "application/json"
+            };
+    
+            let bodyContent = JSON.stringify({
+                title: text,
+                completed: false
+            });
+            console.log(`${url}api/task/addTask/`);
+            let response = await fetch(`${url}api/task/addTask/`, {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+    
+            if (response.ok) {
+                let data = await response.json();
+                setTodo((prev) => {
+                    return [...prev, data.newTask];
+                });
+                setText("");
+                toast.success("task added to list");
+            } else {
+                toast.error("error try again");
+            }
+        } catch (e) {
+            console.log(e);
+            toast.error("Error try again");
+        }
+    }
+    
+    async function completeTask(id, index, todo, setTodo, toast) {
+        try {
+            let headersList = {
+                Accept: "*/*",
+                "Content-Type": "application/json"
+            };
+    
+            let bodyContent = JSON.stringify({
+                completed: true
+            });
+    
+            console.log(bodyContent);
+            let response = await fetch(`${url}api/task/update/${id}`, {
+                method: "PATCH",
+                body: bodyContent,
+                headers: headersList
+            });
+    
+            if (response.ok) {
+                console.log(todo, index, todo[index]);
+                let updatedTodo = Array.from(todo);
+                updatedTodo[index] = updatedTodo[index] ? { ...updatedTodo[index], completed: true } : { ...updatedTodo[index] };
+                console.log(updatedTodo);
+                setTodo(updatedTodo);
+                toast.success("successfully completed task");
+            } else {
+                toast.error("Error try again");
+            }
+        } catch (e) {
+            console.log(e);
+            toast.error("Error try again");
+        }
+    }
+
+    async function deleteTask(id, todo, setTodo, toast) {
+        try {
+            let response = await fetch(`${url}api/task/remove/${id}`, {
+                method: "DELETE"
+            });
+    
+            if (response.ok) {
+                let updatedTask = todo.filter((obj) => obj._id !== id);
+                setTodo(updatedTask);
+                console.log(updatedTask);
+    
+                toast.success("successfully deleted task");
+            } else {
+                toast.error("Error try again");
+            }
+        } catch (e) {
+            toast.error("Error try again");
+        }
+    }
+    
+    async function getAllTodo(setTodo, toast,setLoad) {
+        setLoad(true);
+        try {
+            let response = await fetch(`${url}api/task/`, {
+                method: "GET"
+            });
+    
+            if (response.ok) {
+                let data = await response.json();
+                setTodo(data);
+            } else {
+                toast.error("Error while fetching..");
+            }
+            
+        } catch (e) {
+            toast.error("Error while fetching..");
+        }finally{
+            setLoad(false);
+        }
+    }
+    
+   async function updateTodo(todo, setTodo, setText, toast, text, edit, setEdit) {
+        try {
+            if (text.length < 3) return toast.info("task length must be at least 3");
+    
+            let headersList = {
+                Accept: "*/*",
+                "Content-Type": "application/json"
+            };
+    
+            let bodyContent = JSON.stringify({
+                title: text
+            });
+    
+            console.log(bodyContent);
+            let response = await fetch(`${url}api/task/update/${edit.id}`, {
+                method: "PATCH",
+                body: bodyContent,
+                headers: headersList
+            });
+    
+            if (response.ok) {
+                console.log(todo, edit.index, todo[edit.index]);
+                let updatedTodo = Array.from(todo);
+                updatedTodo[edit.index] = updatedTodo[edit.index] ? { ...updatedTodo[edit.index], title: text } : { ...updatedTodo[edit.index] };
+                console.log(updatedTodo);
+                setTodo(updatedTodo);
+                toast.success("successfully updated task");
+                setText("");
+                setEdit({ set: false, id: null, index: null });
+            } else {
+                toast.error("Error try again");
+            }
+        } catch (e) {
+            console.log(e);
+            toast.error("Error try again");
+        }
+    }
+        
+    
+
+    
 
     useEffect(() => {
         getAllTodo(setTodo, toast, setLoad);

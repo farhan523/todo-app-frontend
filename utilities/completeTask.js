@@ -1,4 +1,4 @@
-const url = require("../../baseUrl");
+const url = require("../baseUrl");
 
 export default async function completeTask(id, index, todo, setTodo, toast) {
     try {

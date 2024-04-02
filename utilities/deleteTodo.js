@@ -1,4 +1,4 @@
-const url = require("../../baseUrl");
+const url = require("../baseUrl");
 
 export default async function deleteTask(id, todo, setTodo, toast) {
     try {

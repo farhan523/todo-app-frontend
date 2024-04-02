@@ -5,11 +5,11 @@ import ListIcon from "@/public/icons/ListIcon";
 import ChevronIcon from "@/public/icons/ChevronIcon";
 import { toast } from "react-toastify";
 
-import addTodo from "./utilities/addTodo";
-import deleteTask from "./utilities/deleteTodo";
-import completeTask from "./utilities/completeTask";
-import updateTodo from "./utilities/updateTodo";
-import getAllTodo from "./utilities/getAllTodo";
+import addTodo from "../utilities/addTodo";
+import deleteTask from "../utilities/deleteTodo";
+import completeTask from "../utilities/completeTask";
+import updateTodo from "../utilities/updateTodo";
+import getAllTodo from "../utilities/getAllTodo";
 
 import TodoItem from "@/components/TodoItem";
 

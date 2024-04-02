@@ -1,4 +1,4 @@
-import url from "../../baseUrl";
+import url from "../baseUrl";
 
 export default async function getAllTodo(setTodo, toast,setLoad) {
     setLoad(true);

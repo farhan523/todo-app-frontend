@@ -9,7 +9,7 @@ import addTodo from "./utilities/addTodo";
 import deleteTask from "./utilities/deleteTodo";
 import completeTask from "./utilities/completeTask";
 import updateTodo from "./utilities/updateTodo";
-import getAllTodo from "./utilities/getAllTodo"
+import getAllTodo from "./utilities/getAllTodo";
 
 import TodoItem from "@/components/TodoItem";
 
@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
     const [todo, setTodo] = useState([]);
     const [text, setText] = useState("");
-    const [load,setLoad]  = useState(true)
+    const [load, setLoad] = useState(true);
     const [edit, setEdit] = useState({
         id: null,
         set: false,
@@ -43,12 +43,12 @@ export default function Home() {
     }
 
     useEffect(() => {
-        getAllTodo(setTodo,toast,setLoad);
+        getAllTodo(setTodo, toast, setLoad);
     }, []);
 
     return (
         <div className="flex justify-center items-center min-h-screen  shadow-inner  bg-[url('../public/images/image.png')]  bg-cover bg-center backdrop-blur   bg-no-repeat">
-            <div className="w-10   flex flex-col items-center" style={{ width: 400, height: 500,}}>
+            <div className="w-10   flex flex-col items-center" style={{ width: 400, height: 500 }}>
                 <div style={{}} className="rounded-full min-w-24 min-h-24 bg-center bg-cover bg-origin-content pt-5 bg-[url('../public/images/profile.jpg')] "></div>
                 <div className="w-5/6 h-9 shadow-md bg-white  rounded mt-5 flex items-center">
                     <input
@@ -85,16 +85,16 @@ export default function Home() {
                     </div>
                     <ChevronIcon />
                 </div>
-                <div className={"w-5/6  justify-center items-center shadow-md min-h-[200px] rounded-md bg-white mt-4 opacity-90 flex-col overflow-x-hidden overflow-y-auto " }>
-                   {
-                    load ? "loading..."  : todo.length ? (
+                <div className={"w-5/6  justify-center items-center shadow-md min-h-[200px] rounded-md bg-white mt-4 opacity-90 flex-col overflow-x-hidden overflow-y-auto "}>
+                    {load ? (
+                        <p>Loading...</p>
+                    ) : todo.length ? (
                         todo.map((task, index) => {
                             return <TodoItem key={task._id} index={index} toast={toast} setTodo={setTodo} todo={todo} editTodo={editTodo} task={task} deleteTask={deleteTask} completeTask={completeTask} />;
                         })
                     ) : (
-                        <p className="justify-center">No task today</p>
+                        <p>No task today</p>
                     )}
-                   
                 </div>
             </div>
         </div>

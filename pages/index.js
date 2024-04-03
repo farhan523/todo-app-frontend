@@ -9,7 +9,7 @@ import addTodo from "../utilities/addTodo";
 import deleteTask from "../utilities/deleteTodo";
 import completeTask from "../utilities/completeTask";
 import updateTodo from "../utilities/updateTodo";
-import getAllTodo from "../utilities/getAllTodo";
+import getAllTodo from "../utilities/getAllTodo"
 
 import TodoItem from "@/components/TodoItem";
 

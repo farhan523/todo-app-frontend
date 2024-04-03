@@ -24,7 +24,7 @@
 }
 
 .hover-trigger:hover .hover-target {
-  height: 150px;
+  height: 13.375rem;
   display:flex;
   visibility: visible;
 
